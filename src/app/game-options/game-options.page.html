@@ -1,4 +1,19 @@
 <app-header></app-header>
 <ion-content>
-
+    <ion-progress-bar *ngIf="!isLoaded" color="primary" type="indeterminate"></ion-progress-bar>
+    <form [formGroup]="gameOptionsForm" *ngIf="isLoaded">
+        <div class="container">
+            <app-text-header [title]="'Select your options!'">
+            </app-text-header>
+            <app-input-text [label]="'Number of questions'" [formCtrlName]="'mumberOfQuestions'" [type]="'number'"
+                [parentGroup]="gameOptionsForm">
+            </app-input-text>
+            <app-select [label]="'Select Category'" [selectValues]="categories" [formCtrlName]="'selectCategory'"
+                [parentGroup]="gameOptionsForm">
+            </app-select>
+            <app-select [label]="'Select Difficulty'" [selectValues]="difficultyLevels"
+                [formCtrlName]="'selectDifficultyLevels'" [parentGroup]="gameOptionsForm"></app-select>
+            <app-generic-button [label]="'START'" (clickEvent)="handleGameOptions()"></app-generic-button>
+        </div>
+    </form>
 </ion-content>
