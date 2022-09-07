@@ -1,20 +1,19 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
+<app-header></app-header>
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <div class="container">
+    <form [formGroup]="loginForm">
+      <app-text-header [title]="'Welcome to trivia!'" [subtitle]="'Fill out the form to start playing'">
+      </app-text-header>
+      <app-input-text [label]="'First Name'" [formCtrlName]="'firstName'" [type]="'text'" [parentGroup]="loginForm">
+      </app-input-text>
+      <app-input-text [label]="'Last Name'" [formCtrlName]="'lastName'" [type]="'text'" [parentGroup]="loginForm">
+      </app-input-text>
+      <app-input-text [label]="'Age'" [formCtrlName]="'age'" [type]="'number'" [parentGroup]="loginForm">
+      </app-input-text>
+      <app-input-text [label]="'Email'" [formCtrlName]="'email'" [type]="'email'" [parentGroup]="loginForm">
+      </app-input-text>
+      <app-generic-button [label]="'CONTINUE'" (clickEvent)="start()">
+      </app-generic-button>
+    </form>
   </div>
 </ion-content>
