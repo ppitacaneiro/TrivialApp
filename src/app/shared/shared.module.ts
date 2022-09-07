@@ -1,3 +1,4 @@
+import { SelectComponent } from './components/select/select.component';
 import { HeaderComponent } from './components/header/header.component';
 import { TextHeaderComponent } from './components/text-header/text-header.component';
 import { GenericButtonComponent } from './components/generic-button/generic-button.component';
@@ -13,6 +14,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     GenericButtonComponent,
     TextHeaderComponent,
     HeaderComponent,
+    SelectComponent,
   ],
   imports: [FormsModule, CommonModule, IonicModule, ReactiveFormsModule],
   exports: [
@@ -20,6 +22,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     GenericButtonComponent,
     TextHeaderComponent,
     HeaderComponent,
+    SelectComponent,
   ],
 })
 export class SharedModule {}
