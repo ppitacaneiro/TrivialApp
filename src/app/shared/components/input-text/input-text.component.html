@@ -1,0 +1,8 @@
+<div [formGroup]="parentGroup">
+    <ion-label>{{ label }}</ion-label>
+    <ion-input [type]="type" formControlName="{{formCtrlName}}" [name]="formCtrlName" ngDefaultControl></ion-input>
+    <ion-text *ngIf="this.parentGroup.get(formCtrlName).touched && this.parentGroup.get(formCtrlName).errors"
+        class="error">
+        {{ showErrorMessage(this.parentGroup.get(formCtrlName).errors) }}
+    </ion-text>
+</div>

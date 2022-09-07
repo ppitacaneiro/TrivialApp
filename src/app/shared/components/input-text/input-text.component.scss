@@ -1,0 +1,16 @@
+ion-input {
+  background-color: white;
+  border-radius: 10px;
+  padding: 5px;
+  color: black;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  font-family: "Merriweather";
+}
+
+.error {
+  font-family: "Merriweather";
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--ion-color-danger);
+}
