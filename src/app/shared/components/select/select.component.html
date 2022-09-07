@@ -1,0 +1,9 @@
+<div [formGroup]="parentGroup">
+  <ion-item>
+    <ion-label>{{ label }}</ion-label>
+    <ion-select formControlName="{{formCtrlName}}" (ionChange)="handleSelect($event)">
+      <ion-select-option [value]="value.id" *ngFor="let value of selectValues">
+        {{value.name}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+</div>
