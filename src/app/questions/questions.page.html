@@ -6,7 +6,7 @@
         <div class="btn-next">
             <app-generic-button [label]="'NEXT'" (clickEvent)="nextQuestion()" *ngIf="!isTriviaFinished()">
             </app-generic-button>
-            <app-generic-button [label]="'FINISH'" *ngIf="isTriviaFinished()" (clickEvent)="getResults()">
+            <app-generic-button [label]="'FINISH'" *ngIf="isTriviaFinished()" (clickEvent)="finish()">
             </app-generic-button>
         </div>
     </div>
