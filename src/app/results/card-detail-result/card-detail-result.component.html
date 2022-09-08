@@ -1,0 +1,28 @@
+<ion-text color="primary">
+  <h3 [innerHTML]="result.question.question"></h3>
+</ion-text>
+<ion-list>
+  <ion-item *ngFor="let answer of result.question.all_answers">
+    <ion-icon name="checkmark-circle-outline" color="success" *ngIf="result.question.correct_answer === answer">
+    </ion-icon>
+    <ion-icon name="close-circle-outline" color="danger" *ngIf="result.answer === answer && !result.isAnswerCorrect">
+    </ion-icon>
+    <ion-text color="primary" class="ion-padding-horizontal">
+      <p [innerHTML]="answer"></p>
+    </ion-text>
+  </ion-item>
+</ion-list>
+
+<!-- <ion-item>
+  <ion-icon name="checkmark-circle-outline" color="success"></ion-icon>
+  <ion-text color="primary" class="ion-padding-horizontal">
+    <p>Awesome text</p>
+  </ion-text>
+</ion-item> -->
+
+<!-- <ion-item>
+  <ion-icon name="close-circle-outline" color="danger" class="ion-padding-horizontal"></ion-icon>
+  <ion-text color="primary">
+    <p>Awesome text</p>
+  </ion-text>
+</ion-item> -->
