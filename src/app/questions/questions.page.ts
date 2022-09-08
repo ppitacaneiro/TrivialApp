@@ -1,10 +1,11 @@
+import { ResultsService } from './../services/results.service';
 import { Result } from './../interfaces/result';
 import { Question } from './../interfaces/question';
 import { MessageService } from './../services/message.service';
 import { OpenTriviaDbService } from './../services/open-trivia-db.service';
 import { GameOptions } from './../interfaces/game-options';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-questions',
@@ -38,11 +39,10 @@ export class QuestionsPage implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private openTriviaDbService: OpenTriviaDbService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private resultsService: ResultsService,
+    private router: Router
   ) {}
-
-  // TODO : Time counter. Time to complete trivia
-  // Calculate Score
 
   ngOnInit() {
     this.isLoaded = false;
@@ -54,6 +54,7 @@ export class QuestionsPage implements OnInit {
   getQuestions() {
     // TODO
     // unsuscribe on destroy
+    // send token to API to not repeat questions
 
     this.openTriviaDbService.getQuestions(this.gameOptions).subscribe(
       (response) => {
@@ -128,19 +129,23 @@ export class QuestionsPage implements OnInit {
     let result: Result = {
       question: question,
       isAnswerCorrect: question.correct_answer === answer ? true : false,
+      answer: answer,
     };
     this.results.push(result);
   }
 
-  getResults() {
-    console.log(this.results);
-    console.log(this.calculateTotalTime());
+  finish() {
+    this.resultsService.setResults(this.results);
+    this.resultsService.setTotalTime(this.calculateTotalTime());
+    this.resultsService.setLevel(this.gameOptions.difficulty);
+    this.router.navigate(['results']);
   }
 
   calculateTotalTime() {
     this.endTime = new Date();
     this.totalTime = this.endTime.getTime() - this.startTime.getTime();
+    this.resultsService.setTimeInMiliSeconds(this.totalTime);
     const time = new Date(this.totalTime);
-    return `${time.getUTCHours()} hours ${time.getUTCMinutes()} minutes ${time.getUTCSeconds()} seconds`;
+    return `${time.getUTCHours()} H ${time.getUTCMinutes()} M ${time.getUTCSeconds()} S`;
   }
 }
