@@ -1,0 +1,9 @@
+<ion-text color="primary">
+  <h3 [innerHTML]="question.question"></h3>
+</ion-text>
+<ion-list>
+  <ion-item *ngFor="let answer of question.all_answers; let numAnswer = index">
+    <ion-button [innerHTML]="answer" (click)="onClick(answer,question,numAnswer)"
+      [ngClass]="{'answerSelected': selectedIndex === numAnswer}"></ion-button>
+  </ion-item>
+</ion-list>
