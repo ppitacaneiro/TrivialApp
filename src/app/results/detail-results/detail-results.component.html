@@ -1,0 +1,13 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>SOLUTIONS</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+    <div class="container">
+        <app-card-detail-result *ngFor="let result of results" [result]="result"></app-card-detail-result>
+    </div>
+</ion-content>
