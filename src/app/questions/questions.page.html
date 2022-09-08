@@ -1,9 +1,13 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>questions</ion-title>
-  </ion-toolbar>
-</ion-header>
-
+<app-header></app-header>
 <ion-content>
-
+    <ion-progress-bar *ngIf="!isLoaded" color="primary" type="indeterminate"></ion-progress-bar>
+    <div class="container" *ngIf="isLoaded">
+        <app-card [question]="actualQuestion" (selectAnswerEvent)="handleSelectAnswer($event)"></app-card>
+        <div class="btn-next">
+            <app-generic-button [label]="'NEXT'" (clickEvent)="nextQuestion()" *ngIf="!isTriviaFinished()">
+            </app-generic-button>
+            <app-generic-button [label]="'FINISH'" *ngIf="isTriviaFinished()" (clickEvent)="getResults()">
+            </app-generic-button>
+        </div>
+    </div>
 </ion-content>
