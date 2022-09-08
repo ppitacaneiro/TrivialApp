@@ -13,6 +13,9 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class QuestionsPage implements OnInit {
   isLoaded: boolean;
+  startTime: Date;
+  endTime: Date;
+  totalTime: number;
   questions: Question[] = [];
   results: Result[] = [];
   isAnswered: boolean = false;
@@ -45,6 +48,7 @@ export class QuestionsPage implements OnInit {
     this.isLoaded = false;
     this.getQueryParams();
     this.getQuestions();
+    this.startTime = new Date();
   }
 
   getQuestions() {
@@ -130,5 +134,13 @@ export class QuestionsPage implements OnInit {
 
   getResults() {
     console.log(this.results);
+    console.log(this.calculateTotalTime());
+  }
+
+  calculateTotalTime() {
+    this.endTime = new Date();
+    this.totalTime = this.endTime.getTime() - this.startTime.getTime();
+    const time = new Date(this.totalTime);
+    return `${time.getUTCHours()} hours ${time.getUTCMinutes()} minutes ${time.getUTCSeconds()} seconds`;
   }
 }
