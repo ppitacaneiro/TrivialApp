@@ -1,7 +1,12 @@
+import { MessageService } from './../services/message.service';
+import { TriviaApiService } from './../services/trivia-api.service';
+import { PlayerService } from './../services/player.service';
 import { Router } from '@angular/router';
 import { ResultsService } from './../services/results.service';
 import { Component, OnInit } from '@angular/core';
 import { Result } from '../interfaces/result';
+import { Player } from '../interfaces/player';
+import { Score } from '../interfaces/score';
 
 const pointsIfAnswerIsCorrect: number = 1000;
 
@@ -17,30 +22,49 @@ export class ResultsPage implements OnInit {
   score: number;
   time: string;
   results: Result[] = [];
+  player: Player;
+  finalScore: Score = {
+    playerId: 0,
+    totalScore: 0,
+  };
 
-  constructor(private resultsService: ResultsService, private router: Router) {}
+  constructor(
+    private resultsService: ResultsService,
+    private router: Router,
+    private playerService: PlayerService,
+    private triviaApiService: TriviaApiService,
+    private messageService: MessageService
+  ) {}
 
   ngOnInit() {
     this.results = this.resultsService.getResults();
-
-    console.log(this.results);
-
     this.time = this.resultsService.getTotalTime();
     this.totalQuestions = this.results.length;
     this.correctAnswers = this.findCorrectAnswers();
     this.incorrectAnswers = this.totalQuestions - this.correctAnswers;
     this.score = this.calculateScore();
+    this.player = this.playerService.getPlayer();
+    this.finalScore.playerId = this.player.id;
+    this.finalScore.totalScore = this.score;
+    this.saveScoreRemotely(this.finalScore);
   }
 
-  // TODO
-  // Implement returning type in all methods
+  saveScoreRemotely(score: Score) {
+    this.triviaApiService.saveScore(score).subscribe(
+      (response) => {
+        console.log(response);
+      },
+      (error) => {
+        console.error(error);
+        this.messageService.presentToast(error.message);
+      }
+    );
+  }
+
   findCorrectAnswers(): number {
     return this.results.filter((x) => x.isAnswerCorrect).length;
   }
 
-  // TODO
-  // Subtract time in mileseconds for calculate total score
-  // depending on the level of difficulty recalculate score
   calculateScore(): number {
     const difficulty = this.resultsService.getLevel();
     const time = this.resultsService.getTimeInMiliSeconds();
@@ -74,5 +98,9 @@ export class ResultsPage implements OnInit {
 
   goToDetails() {
     this.router.navigate(['results/details']);
+  }
+
+  goToRankings() {
+    this.router.navigate(['rankings']);
   }
 }
