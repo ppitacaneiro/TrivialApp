@@ -17,16 +17,4 @@ export class DetailResultsComponent implements OnInit {
     this.results = this.resultsService.getResults();
     this.isLoaded = true;
   }
-
-  logScrollStart(event) {
-    console.log('logScrollStart : When Scroll Starts', event);
-  }
-
-  logScrolling(event) {
-    console.log('logScrolling : When Scrolling', event);
-  }
-
-  logScrollEnd(event) {
-    console.log('logScrollEnd : When Scroll Ends', event);
-  }
 }
