@@ -16,7 +16,7 @@
         <app-item-result [label]="'Total Score'" [icon]="'trophy'" [num]="score">
         </app-item-result>
         <div class="ion-margin-top">
-            <app-generic-button [label]="'RANKING'"></app-generic-button>
+            <app-generic-button [label]="'RANKING'" (clickEvent)="goToRankings()"></app-generic-button>
         </div>
         <div class="ion-margin-top">
             <app-generic-button [label]="'VIEW SOLUTIONS'" (clickEvent)="goToDetails()"></app-generic-button>
